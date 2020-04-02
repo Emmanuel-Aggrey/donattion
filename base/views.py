@@ -29,7 +29,7 @@ def charge(request):
 
 		customer = stripe.Customer.create(
 			email=request.POST['email'],
-			name=request.POST['nickname'],
+			name=request.POST['name'],
 			source=request.POST['stripeToken']
 			)
 
