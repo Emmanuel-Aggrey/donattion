@@ -6,16 +6,18 @@ import stripe
 
 stripe.api_key = "sk_test_cIhdY45Fv5tvwikKX6zmFwPZ00JKddro4t"
 
+# var stripe = Stripe('pk_test_tyBXayYwRAZ8PyMR9B6JOuSP00qjKOMyTi');
+
 # Create your views here.
 
 def index(request):
 
 	return render(request, 'base/index.html')
 
-def coronacheck(request):
-    
-	return render(request, 'base/coronacheck.html')
 
+def coronacheck(request):
+    	
+    return render(request,'base/coronacheck.html')
 
 def charge(request):
 

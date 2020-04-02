@@ -25,7 +25,7 @@ SECRET_KEY = '2vc8#$fzhh-z9h(-(5kl2kj)ijq-1_(s0j5g4&)+9z%0t30x-1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'donatetometest.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'donatetometest.herokuapp.com','192.168.43.212']
 
 
 # Application definition

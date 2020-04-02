@@ -1,3 +1,8 @@
+{% extends 'base/template.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
 <html>
   <head>
     <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
@@ -7,7 +12,27 @@
   </head>
   <body>
 
-    
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="{% url 'index' %}">Donate To this Project</a>
+        <!-- <a class="breadcrumb-item" href="#"></a> -->
+        <span class="breadcrumb-item active"></span>
+    </nav>
+
+
+
+<br>
+  
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>SEARCH CORONA CASE BY COUNTRY</h3>
+  <input class="my-4" type="text" name="" is="target" required placeholder="search by country" >
+    <button style="width: 200px;" id="submit" type="submit" class="btn btn-primary my-4">Submit</button>
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <div class="row justify-content-center">
 
     <table id="receipts" style="display: contents;">
         <tr>
@@ -22,9 +47,8 @@
             <th>Updated On</th>
         </tr>
     </table>
-
-    <input type="search" name="Country" id="target">
-    <input type="submit" value="search" id="submit">
+        </div>
+    </div>
 
     
 <script>
@@ -91,3 +115,5 @@ $.ajax({
     
   </body>
 </htm>
+  
+{% endblock content %}

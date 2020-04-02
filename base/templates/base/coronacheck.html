@@ -1,119 +1,195 @@
 {% extends 'base/template.html' %}
 {% load static %}
 {% block content %}
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <html>
-  <head>
-    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 
-    <script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+<head>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-  </head>
-  <body>
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+</head>
+
+<body style="background-color: #f9f9f9;">
     <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="{% url 'index' %}">Donate To this Project</a>
+        <a class="breadcrumb-item display-4  " style="margin-left: 30%;" href="{% url 'index' %}"
+            style="font-style: italic; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Donate
+            To this Project</a>
         <!-- <a class="breadcrumb-item" href="#"></a> -->
-        <span class="breadcrumb-item active"></span>
+
     </nav>
 
 
 
-<br>
-  
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h3>SEARCH CORONA CASE BY COUNTRY</h3>
-  <input class="my-4" type="text" name="" is="target" required placeholder="search by country" >
-    <button style="width: 200px;" id="submit" type="submit" class="btn btn-primary my-4">Submit</button>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>SEARCH CORONA CASE BY COUNTRY</h3>
+                <!-- <input class="my-4" type="text" name="" id="target" required placeholder="search by country" > -->
+                {% include "base/countries.html" %}
+
+                <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white">Submit</button>
+            </div>
         </div>
     </div>
-</div>
-    <div class="container">
+    <h3 class="float-right">API SOURCE <a href="https://github.com/novelcovid/api" target="_blank"
+            rel="noopener noreferrer">here</a></h3>
+    <div class="container" style="margin-top: 5%;">
+
         <div class="row justify-content-center">
 
-    <table id="receipts" style="display: contents;">
-        <tr>
-            <th>Country</th>
-            <th>No Cases</th>
-            <th>TodayCases</th>
-            <th>Deaths</th>
-            <th>Today Deaths</th>
-            <th>Recovered</th>
-           
-            <th>Active</th>
-            <th>Updated On</th>
-        </tr>
-    </table>
+            <table id="cases">
+                <tr>
+                    <th>Country</th>
+                    <th>No Cases</th>
+                    <th>TodayCases</th>
+                    <th>Deaths</th>
+                    <th>Today Deaths</th>
+                    <th>Recovered</th>
+                    <th>Updated On</th>
+
+                </tr>
+
+
+            </table>
+
+        </div>
+        <h4>
+
+        </h4>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <canvas id="myChart"></canvas>
+
         </div>
     </div>
 
-    
-<script>
-    
-    $(document).ready(function(){
-//
+    <script>
+        $(document).ready(function () {
+            //
 
-// One Country ='https://corona.lmao.ninja/countries/USA'
-// all contry ='https://corona.lmao.ninja/countries?sort=country'
+            // One Country ='https://corona.lmao.ninja/countries/USA'
+            // all contry ='https://corona.lmao.ninja/countries?sort=country'
 
-$( "#submit" ).click(function() {
+            $("#submit").click(function () {
+             
+                var target = $("#country").val();
+                // console.log(target)
+                url = 'https://corona.lmao.ninja/countries/' + target,
+                    // url ='https://restcountries.eu/rest/v2/all',
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            if(!data){
+                                $('#submit').html('loading...')
+                            }
+                            
 
-    var target = $("#target").val();
-// console.log(target)
-url = 'https://corona.lmao.ninja/countries/'+target,
+                            $('#cases tbody').append(
+                                '<tr><td>' + data.country +
+                                '</td><td>' + data.cases +
+                                '</td><td>' + data.todayCases +
+                                '</td><td>' + data.deaths +
+                                '</td><td>' + data.todayDeaths +
+                                '</td><td>' + data.recovered +
+                                '</td><td>' + Date(data.updated) +
 
-$.ajax({
-    url: url,
-    type: 'GET',
-    dataType: 'json',
-    success: function(data) {
-        console.log(data)
-        
-        $('#receipts tbody').append(
-                        '<tr><td>' + data.country + 
-                        '</td><td>' + data.cases +
-                        '</td><td>' + data.todayCases +
-                        '</td><td>' + data.deaths + 
-                        '</td><td>' + data.todayDeaths + 
-                        '</td><td>' + data.recovered + 
-                        '</td><td>' + data.active + 
-                        '</td><td>' + Date(data.updated)+ 
-                        '</td></tr>'
-                    )
-    },
-    error: function(jqXHR, textStatus, errorThrown){
-        alert('Error: ' + textStatus + ' - ' + errorThrown);
-    }
-});
+                                '</td></tr>'
+                            )
+
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                                            console.log(data)
+                            var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'line',
+                                // The data for our dataset
+                                data: {
+                                    labels: ['Cases', 'Today Cases ', 'Today Death(s)',
+                                        'Recovred', 
+                                    ],
+                                    datasets: [{
+                                        label: 'NovelCOVID Result for '+data.country,
+                                        backgroundColor: 'rgb(255, 99, 132)',
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        data: [data.cases, data.todayCases, data.deaths, data.todayDeaths, data.recovered,]
+                                    }]
+                                },
+
+                                // Configuration options go here
+                                options: {}
+                            });
 
 
-});
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // alert('Error: ' + textStatus + ' - ' + errorThrown);
 
-});
-</script>
+                            toastr.info('no NovelCOVID infomation found in this country')
+                            toastr.options.closeDuration = 300;
 
 
-<img src="" alt="">
-<style>
-    table {
-        width: 50%;
-    }
-    th {
-        background: #f1f1f1;
-        font-weight: bold;
-        padding: 6px;
-    }
-    td {
-        background: #f9f9f9;
-        padding: 6px;
-    }
+
+
+                        }
+                    });
+
+
+            });
+
+        });
+
+        $(document).ready(function () {
+            $('.country').select2();
+        });
+
+
+        // chartjs
+    </script>
+
+
+
+    <style>
+        table {
+            width: 50%;
+        }
+
+        th {
+            background: #f1f1f1;
+            font-weight: bold;
+            padding: 6px;
+        }
+
+        td {
+            background: #f9f9f9;
+            padding: 6px;
+        }
     </style>
 
-    
-  </body>
+
+    <!-- populate select box -->
+
+
+
+
+
+</body>
 </htm>
-  
+
+
+
 {% endblock content %}

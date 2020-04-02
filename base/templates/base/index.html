@@ -43,12 +43,12 @@
 	
 
 	<div id="container">
-		<div class="column-6">
+		<div class="column-6" style="margin-left: 20%;">
 			<div id="left-wrapper">
 				<img id="profile-pic" src="{% static 'images/donate.png' %}">
 				<div id="left-wrapper-header">
-					<h3>Donate To me</h3>
-					<h5>One Time Donation</h5>
+					<h3>Donate to my effort</h3>
+					
 				</div>
 				<div style="clear:left"></div>
 				<hr>
@@ -56,14 +56,11 @@
 				<form action="{% url 'charge' %}" method="post" id="payment-form">
 					{% csrf_token %}
 					<div class="form-field-12">
-						<label for="amount">Choose Amount:</label>
+						<label for="amount">Amount:</label>
 						<br>
 						<br>
-						<select required name="amount" id="amount">
-						  <option selected value="5">$5 --- Here's a coffee, on me :)</option>
-						  <option value="10">$10 --- You helped me, so I am going to help you</option>
-						  <option value="25">$25 --- I love your channel!</option>
-						</select>
+						<input id="amount" required type="number" name="amount" placeholder="any amount...">
+
 					</div>
 
 					<div class="form-field-6">
@@ -71,7 +68,7 @@
 					</div>
 
 					<div class="form-field-6">
-						<input required type="text" name="nickname" placeholder="Nickname...">
+						<input required type="text" name="name" placeholder="name...">
 					</div>
 
 				  <div class="form-row">
@@ -89,23 +86,17 @@
 				  <div style="clear:left"></div>
 				  <hr>
 
-				 	<input  class="myButton" style="background-color:#255015" type="submit" value="Submit Payment" name="">
+				 	<input  class="myButton" style="background-color:#10a195" type="submit" value="Submit Payment" name="">
 
-				</form>
+				</form> 
+				<a style="margin-top: 10%;"  href="{% url 'coronacheck' %}" class="myButton">Check Corona status per country</a>
+
 
 			
 			</div>
 		</div>
 
-		<div class="column-6">
-			<div id="right-wrapper">
-
 		
-
-				<hr>
-				 <a href="{% url 'coronacheck' %}" class="myButton">Back to check corona status per country</a> 
-			</div>
-		</div>
 	</div>
 
 
@@ -116,6 +107,7 @@
 	<script>
 		// Create a Stripe client.
 		var stripe = Stripe('pk_test_tyBXayYwRAZ8PyMR9B6JOuSP00qjKOMyTi');
+
 
 		// Create an instance of Elements.
 		var elements = stripe.elements();
@@ -129,7 +121,7 @@
 		    fontSmoothing: 'antialiased',
 		    fontSize: '16px',
 		    '::placeholder': {
-		      color: '#aab7cs4'
+		      color: '#aab7c4'
 		    }
 		  },
 		  invalid: {
@@ -157,7 +149,7 @@
 		// Handle form submission.
 		var form = document.getElementById('payment-form');
 		form.addEventListener('submit', function(event) {
-	
+		  event.preventDefault();
 
 		  stripe.createToken(card).then(function(result) {
 		    if (result.error) {
@@ -185,5 +177,10 @@
 		  form.submit();
 		}
 	</script>
-
+	<style>
+		body{
+			background-color: #56B9BB;
+		}
+	</style>
+	
 {% endblock content %}
