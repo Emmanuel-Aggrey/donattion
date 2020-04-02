@@ -45,7 +45,7 @@
 	<div id="container">
 		<div class="column-6">
 			<div id="left-wrapper">
-				<img id="profile-pic" src="{% static 'images/Dennis.JPG' %}">
+				<img id="profile-pic" src="{% static 'images/donate.png' %}">
 				<div id="left-wrapper-header">
 					<h3>Donate To me</h3>
 					<h5>One Time Donation</h5>
@@ -89,7 +89,7 @@
 				  <div style="clear:left"></div>
 				  <hr>
 
-				 	<input  class="myButton" style="background-color:#10a195" type="submit" value="Submit Payment" name="">
+				 	<input  class="myButton" style="background-color:#255015" type="submit" value="Submit Payment" name="">
 
 				</form>
 
@@ -101,15 +101,9 @@
 			<div id="right-wrapper">
 
 		
-	
-	<!-- <form action="" id="process"> -->
-		
-	<!-- </form> -->
-				{% comment %} <h3>If I've provided you with value please consider supporting our efforts ;)</h3> {% endcomment %}
 
-				{% comment %} <p>Source code and videos are free to download, use as you wish :) At no point should you feel obligated to donate but if you have the means consider the time and effort I put into each project/video. Thank you!</p> {% endcomment %}
 				<hr>
-				{% comment %} <a href="https://github.com/divanov11/donatetome" target="_blank" class="myButton">Download source code</a> {% endcomment %}
+				 <a href="{% url 'coronacheck' %}" class="myButton">Back to check corona status per country</a> 
 			</div>
 		</div>
 	</div>
@@ -192,20 +186,4 @@
 		}
 	</script>
 
-<!-- convid script -->
-
-
-
-<div class="form-field-6">
-	<input style="width: 290px" required type="text" name="nickname" placeholder="country name"> <br>
-	<button style="margin-top: 5%; height:40px; width: 300px; font-size: large; color: #10a195;" type="submit" class="btn btn-primary">Submit</button>
-
-</div>
-
-	
-<style>
-	table, th, td {
-  border: 1px solid black;
-}
-</style>
 {% endblock content %}
