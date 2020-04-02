@@ -40,8 +40,8 @@
                 {% include "base/countries.html" %}
 
                     <!-- <img  id="load" src="" alt=""> -->
-                    <small style="color: blue;font-weight: 100;font-size: xx-large;" id="load"></small>
-                <!-- <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white">Submit</button> -->
+                    <!-- <small style="color: blue;font-weight: 100;font-size: xx-large;" id="load"></small> -->
+                <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white">Submit</button>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
             // One Country ='https://corona.lmao.ninja/countries/USA'
             // all contry ='https://corona.lmao.ninja/countries?sort=country'
 
-            $("#country").mouseup(function () {
+            $("#submit").click(function () {
              
                 var target = $("#country").val();
                 // console.log(target)
@@ -99,11 +99,11 @@
                         type: 'GET',
                         dataType: 'json',
                         beforeSend:function(){
-                            $('#load').html('loading data ...').css('margin-left','5%')
+                            $('#submit').html('loading data ...')
                             // $('#load').attr('src','static/images/load.gif')
                         },
                         complete:function(){
-                            $('#load').html('')
+                            $('#submit').html('submit')
                         },
                         success: function (data) {
                             // console.log(data)
