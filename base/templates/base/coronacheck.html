@@ -49,7 +49,7 @@
 
         <div class="row justify-content-center">
 
-            <table id="cases">
+            <table id="cases" class="table table-bordered">
                 <tr>
                     <th>Country</th>
                     <th>No Cases</th>
@@ -57,7 +57,9 @@
                     <th>Deaths</th>
                     <th>Today Deaths</th>
                     <th>Recovered</th>
+                    <th>Critical</th>
                     <th>Updated On</th>
+                 
 
                 </tr>
 
@@ -95,9 +97,8 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
-                            if(!data){
-                                $('#submit').html('loading...')
-                            }
+                            // console.log(data)
+                          
                             
 
                             $('#cases tbody').append(
@@ -107,13 +108,14 @@
                                 '</td><td>' + data.deaths +
                                 '</td><td>' + data.todayDeaths +
                                 '</td><td>' + data.recovered +
+                                    '</td><td>' + data.critical +
                                 '</td><td>' + Date(data.updated) +
-
+                               
                                 '</td></tr>'
                             )
 
                             var ctx = document.getElementById('myChart').getContext('2d');
-                                            console.log(data)
+                                            // console.log(data)
                             var chart = new Chart(ctx, {
                                 // The type of chart we want to create
                                 type: 'line',
