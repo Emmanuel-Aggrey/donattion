@@ -39,7 +39,9 @@
                 <!-- <input class="my-4" type="text" name="" id="target" required placeholder="search by country" > -->
                 {% include "base/countries.html" %}
 
-                <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white">Submit</button>
+                    <!-- <img  id="load" src="" alt=""> -->
+                    <small style="color: blue;font-weight: 100;font-size: xx-large;" id="load"></small>
+                <!-- <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white">Submit</button> -->
             </div>
         </div>
     </div>
@@ -86,7 +88,7 @@
             // One Country ='https://corona.lmao.ninja/countries/USA'
             // all contry ='https://corona.lmao.ninja/countries?sort=country'
 
-            $("#submit").click(function () {
+            $("#country").mouseup(function () {
              
                 var target = $("#country").val();
                 // console.log(target)
@@ -96,6 +98,13 @@
                         url: url,
                         type: 'GET',
                         dataType: 'json',
+                        beforeSend:function(){
+                            $('#load').html('loading data ...').css('margin-left','5%')
+                            // $('#load').attr('src','static/images/load.gif')
+                        },
+                        complete:function(){
+                            $('#load').html('')
+                        },
                         success: function (data) {
                             // console.log(data)
                           
@@ -141,7 +150,7 @@
                         error: function (jqXHR, textStatus, errorThrown) {
                             // alert('Error: ' + textStatus + ' - ' + errorThrown);
 
-                            toastr.info('no NovelCOVID infomation found in this country')
+                            toastr.info('no NovelCOVID infomation found in this country or no network')
                             toastr.options.closeDuration = 300;
 
 
