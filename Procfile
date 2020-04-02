@@ -1,0 +1,1 @@
+web: gunicorn donatetome.wsgi --log-file -

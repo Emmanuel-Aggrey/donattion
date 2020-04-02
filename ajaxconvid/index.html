@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+    <script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+
+    
+
+    <table id="receipts" style="display: contents;">
+        <tr>
+            <th>Country</th>
+            <th>No Cases</th>
+            <th>TodayCases</th>
+            <th>Deaths</th>
+            <th>Today Deaths</th>
+            <th>Recovered</th>
+           
+            <th>Active</th>
+            <th>Updated On</th>
+        </tr>
+    </table>
+
+    <input type="search" name="Country" id="target">
+    <input type="submit" value="search" id="submit">
+
+    
+<script>
+    
+    $(document).ready(function(){
+//
+
+// One Country ='https://corona.lmao.ninja/countries/USA'
+// all contry ='https://corona.lmao.ninja/countries?sort=country'
+
+$( "#submit" ).click(function() {
+
+    var target = $("#target").val();
+// console.log(target)
+url = 'https://corona.lmao.ninja/countries/'+target,
+
+$.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        console.log(data)
+        
+        $('#receipts tbody').append(
+                        '<tr><td>' + data.country + 
+                        '</td><td>' + data.cases +
+                        '</td><td>' + data.todayCases +
+                        '</td><td>' + data.deaths + 
+                        '</td><td>' + data.todayDeaths + 
+                        '</td><td>' + data.recovered + 
+                        '</td><td>' + data.active + 
+                        '</td><td>' + Date(data.updated)+ 
+                        '</td></tr>'
+                    )
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+        alert('Error: ' + textStatus + ' - ' + errorThrown);
+    }
+});
+
+
+});
+
+});
+</script>
+
+
+<img src="" alt="">
+<style>
+    table {
+        width: 50%;
+    }
+    th {
+        background: #f1f1f1;
+        font-weight: bold;
+        padding: 6px;
+    }
+    td {
+        background: #f9f9f9;
+        padding: 6px;
+    }
+    </style>
+
+    
+  </body>
+</htm>
