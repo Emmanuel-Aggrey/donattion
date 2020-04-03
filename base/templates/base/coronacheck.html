@@ -97,14 +97,15 @@
                         url: url,
                         type: 'GET',
                         dataType: 'json',
-                        timeout: 30000,
+                        timeout: 8000,
                         beforeSend:function(){
+                            
                             $('#submit').html('loading data please wait...')
+
                             // $('#load').attr('src','static/images/load.gif')
                         },
                         complete:function(){
                             $('#submit').html('submit')
-                          
                         },
                         success: function (data) {
                             // console.log(data)
@@ -153,7 +154,7 @@
                         error: function (jqXHR, textStatus, errorThrown) {
                             // alert('Error: ' + textStatus + ' - ' + errorThrown);
 
-                            toastr.info('no NovelCOVID infomation found in this country or your network took too long to respond')
+                            toastr.info('no NovelCOVID infomation found in this country or  network problem')
                             toastr.options.closeDuration = 3000;
 
 
