@@ -60,7 +60,7 @@
                     <th>Recovered</th>
                     <th>Critical</th>
                     <th>Updated On</th>
-                    <th><img class="image" src="" alt="">image</th>
+                    <th><img class="image" src="" alt="">flag</th>
                  
 
                 </tr>
@@ -122,9 +122,10 @@
                                 '</td><td>' + data.recovered +
                                     '</td><td>' + data.critical +
                                 '</td><td>' + Date(data.updated) +
-                                $(".image").attr("src", data.countryInfo.flag),
+                                    $(".image").attr("src", data.countryInfo.flag),
 
-                                '</td></tr>'
+                                '</td></tr>',
+
                             )
 
                             var ctx = document.getElementById('myChart').getContext('2d');
@@ -134,8 +135,8 @@
                                 type: 'line',
                                 // The data for our dataset
                                 data: {
-                                    labels: ['Cases', 'Today Cases ', 'Today Death(s)',
-                                        'Recovred', 
+                                    labels: ['Cases', 'Today Cases ','Deaths','Today Death(s)',
+                                        'Recovered', 
                                     ],
                                     datasets: [{
                                         label: 'NovelCOVID Result for '+data.country,
@@ -156,7 +157,7 @@
                         error: function (jqXHR, textStatus, errorThrown) {
                             // alert('Error: ' + textStatus + ' - ' + errorThrown);
 
-                            toastr.info('no NovelCOVID infomation found in this country or  network problem')
+                            toastr.info('no NovelCOVID infomation found in this country or delayed in respond')
                             toastr.options.closeDuration = 3000;
 
 

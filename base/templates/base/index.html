@@ -1,6 +1,9 @@
 {% extends 'base/template.html' %}
+<meta name="viewport" content="width=1024">
+
 {% load static %}
 {% block content %}
+
 	<style type="text/css">
 		/**
 		 * The CSS shown here will not be introduced in the Quickstart guide, but shows
@@ -43,9 +46,13 @@
 	
 
 	<div id="container">
+
 		<div class="column-6" style="margin-left:1%;">
+
 			<div id="left-wrapper">
+
 				<img id="profile-pic" src="{% static 'images/donate.png' %}">
+				
 				<div id="left-wrapper-header">
 					<h3>Donate to my effort</h3>
 					
@@ -91,6 +98,7 @@
 				</form> 
 				<a style="margin-top: 10%;"  href="{% url 'coronacheck' %}" class="myButton">Check Corona status per country</a>
 
+				<small class="float-right text-muted">powerd by stipe</small>
 
 			
 			</div>
