@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import JsonResponse
-import requests
 import stripe
 
 stripe.api_key = "sk_test_cIhdY45Fv5tvwikKX6zmFwPZ00JKddro4t"

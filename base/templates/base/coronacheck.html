@@ -41,7 +41,7 @@
 
                     <!-- <img  id="load" src="" alt=""> -->
                     <!-- <small style="color: blue;font-weight: 100;font-size: xx-large;" id="load"></small> -->
-                <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white">Submit</button>
+                <button style="width: 300px; height: 80px;" id="submit" type="submit" class="btn btn-primary my-4 btn-outline-info text-white"><h1>Submit</h1></button>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
         <div class="row justify-content-center">
 
             <table id="cases" class="table table-bordered">
-                <tr>
+                <tr class="" style="font-size: x-large;">
                     <th>Country</th>
                     <th>No Cases</th>
                     <th>TodayCases</th>
@@ -91,7 +91,7 @@
              
                 var target = $("#country").val();
                 // console.log(target)
-                url = 'https://corona.lmao.ninja/v2/countries' + target,
+                url = 'https://corona.lmao.ninja/v2/countries/'+target,
                     // url ='https://restcountries.eu/rest/v2/all',
                     $.ajax({
                         url: url,
