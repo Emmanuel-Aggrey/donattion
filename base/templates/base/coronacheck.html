@@ -60,6 +60,7 @@
                     <th>Recovered</th>
                     <th>Critical</th>
                     <th>Updated On</th>
+                    <th><img class="image" src="" alt="">image</th>
                  
 
                 </tr>
@@ -121,7 +122,8 @@
                                 '</td><td>' + data.recovered +
                                     '</td><td>' + data.critical +
                                 '</td><td>' + Date(data.updated) +
-                               
+                                $(".image").attr("src", data.countryInfo.flag),
+
                                 '</td></tr>'
                             )
 
